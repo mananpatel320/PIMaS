@@ -35,6 +35,14 @@ const PRSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users',
   },
+  deliveryTime: {
+    type: Date,
+  },
+  status: {
+    type: String,
+    enum: ['pending', 'passed'],
+    default: 'pending',
+  },
 });
 
 module.exports = PR = mongoose.model('pr', PRSchema);

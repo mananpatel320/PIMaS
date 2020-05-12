@@ -53,6 +53,8 @@ router.post(
       name: req.body.name,
       materials: req.body.materials,
       postedBy: req.user.id,
+      deliveryTime: req.body.deliveryTime,
+      status: req.body.status,
     });
 
     newPR.save((err, pr) => {
