@@ -46,9 +46,9 @@ router.post('/register', (req, res) => {
   });
 });
 
-//@route POST api/users/login
-//@desc Login user and return JWT token
-//@access Public
+//@route  POST api/users/login
+//@desc   Login user and return JWT token
+//@access Private
 router.post('/login', (req, res) => {
   //From validation
   const { errors, isValid } = validateLoginInput(req.body);
@@ -62,7 +62,7 @@ router.post('/login', (req, res) => {
   User.findOne({ email }).then((user) => {
     //Check if user exists
     if (!user) {
-      return res.status(404).json({ emailnotfound: 'Email not found' });
+      return res.status(404).json({ emailnotfound: 'Invalid Credentials' });
     }
     //Check password
     bcrypt.compare(password, user.password).then((isMatch) => {
@@ -90,7 +90,7 @@ router.post('/login', (req, res) => {
       } else {
         return res
           .status(400)
-          .json({ passwordincorrect: 'Password incorrect' });
+          .json({ passwordincorrect: 'Invalid Credentials' });
       }
     });
   });
