@@ -1,16 +1,15 @@
 import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import 'materialize-css/dist/css/materialize.min.css';
-import M from 'materialize-css';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { logoutUser } from '../../actions/authActions';
+import $ from 'jquery';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
   useEffect(() => {
-    document.addEventListener('DOMContentLoaded', function () {
-      var elems = document.querySelectorAll('.sidenav');
-      M.Sidenav.init(elems, {});
+    $(document).ready(function () {
+      $('.sidenav').sidenav();
     });
   });
   const authLinks = (
@@ -92,7 +91,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
           <Link to='/' className='brand-logo black-text'>
             THE <b>PALM</b>
           </Link>
-          <a href='#!' data-target='mobile-demo' class='sidenav-trigger'>
+          <a href='#!' data-activates='mobile-demo' class='sidenav-trigger'>
             <i class='material-icons black-text'>menu</i>
           </a>
           {!loading && (
