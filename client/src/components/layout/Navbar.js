@@ -1,20 +1,20 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import 'materialize-css/dist/css/materialize.min.css';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { logoutUser } from '../../actions/authActions';
-import M from 'materialize-css';
+// import M from 'materialize-css';
 
 // https://itnext.io/add-state-and-lifecycle-methods-to-function-components-with-react-hooks-8e2bdc44d43d
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
-  useEffect(() => {
-    document.addEventListener('DOMContentLoaded', function () {
-      var elems = document.querySelectorAll('.sidenav');
-      var instances = M.Sidenav.init(elems, {});
-    });
-  });
+  // useEffect(() => {
+  //   document.addEventListener('DOMContentLoaded', function () {
+  //     var elems = document.querySelectorAll('.sidenav');
+  //     var instances = M.Sidenav.init(elems, {});
+  //   });
+  // });
   const authLinks = (
     <ul class='right hide-on-med-and-down'>
       <li>
