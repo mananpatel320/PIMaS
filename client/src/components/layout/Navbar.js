@@ -4,12 +4,15 @@ import 'materialize-css/dist/css/materialize.min.css';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { logoutUser } from '../../actions/authActions';
-import $ from 'jquery';
+import M from 'materialize-css';
+
+// https://itnext.io/add-state-and-lifecycle-methods-to-function-components-with-react-hooks-8e2bdc44d43d
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
   useEffect(() => {
-    $(document).ready(function () {
-      $('.sidenav').sidenav();
+    document.addEventListener('DOMContentLoaded', function () {
+      var elems = document.querySelectorAll('.sidenav');
+      var instances = M.Sidenav.init(elems, {});
     });
   });
   const authLinks = (
@@ -91,7 +94,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
           <Link to='/' className='brand-logo black-text'>
             THE <b>PALM</b>
           </Link>
-          <a href='#!' data-activates='mobile-demo' class='sidenav-trigger'>
+          <a href='#!' data-target='mobile-demo' class='sidenav-trigger'>
             <i class='material-icons black-text'>menu</i>
           </a>
           {!loading && (
