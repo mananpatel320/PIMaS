@@ -20,13 +20,21 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
   const authLinks = (
     <ul className='right hide-on-med-and-down'>
       <li>
-        <Link className='dropdown-trigger black-text' data-target='dropdown1'>
+        <Link
+          to='#!'
+          className='dropdown-trigger black-text'
+          data-target='dropdown1'
+        >
           Purchase Requisition
           <i className='material-icons right'>arrow_drop_down</i>
         </Link>
       </li>
       <li>
-        <Link className='dropdown-trigger black-text' data-target='dropdown2'>
+        <Link
+          to='#!'
+          className='dropdown-trigger black-text'
+          data-target='dropdown2'
+        >
           Purchase Order
           <i className='material-icons right'>arrow_drop_down</i>
         </Link>
@@ -80,7 +88,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
       <li className='no-padding'>
         <ul className='collapsible collapsible-accordion'>
           <li>
-            <Link className='collapsible-header'>
+            <Link to='#!' className='collapsible-header'>
               <i className='material-icons'>arrow_drop_down</i>
               Purchase Requisition
             </Link>
@@ -103,7 +111,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
       <li className='no-padding'>
         <ul className='collapsible collapsible-accordion'>
           <li>
-            <Link className='collapsible-header'>
+            <Link to='#!' className='collapsible-header'>
               <i className='material-icons'>arrow_drop_down</i>
               Purchase Order
             </Link>

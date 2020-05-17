@@ -1,12 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
+import { deletePR } from '../../actions/prActions';
 
 const PRItem = ({
+  deletePR,
   auth,
-  pr: { _id, name, materials, postedBy, deliveryTime, status, created },
+  pr: {
+    _id,
+    name,
+    materials,
+    postedBy,
+    deliveryTime,
+    status,
+    created,
+    userName,
+  },
 }) => {
   const pendingPR = (
     <div className='card-panel hoverable red lighten-5 z-depth-1'>
@@ -20,37 +30,41 @@ const PRItem = ({
           Filed on{' '}
           <b>
             <Moment format='DD/MM/YYYY'>{created}</Moment>
-          </b>
+          </b>{' '}
+          by <b>{userName}</b>
         </p>
         <div className='card-action'>
           <div className='row'>
             <div className='s12 center-align'>
               <div className='col s6'>
-                <Link
-                  to='#!'
+                <button
+                  onClick={`pr/${_id}`}
                   style={{
                     width: '140px',
                     borderRadius: '3px',
                     letterSpacing: '1.5px',
                   }}
-                  class='waves-effect waves-light hoverable btn-small red'
+                  className='waves-effect waves-light hoverable btn-small red'
                 >
                   View PR
-                </Link>
+                </button>
               </div>
-              <div className='col s6'>
-                <Link
-                  to='#!'
-                  style={{
-                    width: '140px',
-                    borderRadius: '3px',
-                    letterSpacing: '1.5px',
-                  }}
-                  class='waves-effect waves-light hoverable btn-small black'
-                >
-                  Delete PR
-                </Link>
-              </div>
+              {!auth.loading &&
+                postedBy.toString() === auth.user.id.toString() && (
+                  <div className='col s6'>
+                    <button
+                      onClick={(e) => deletePR(_id)}
+                      style={{
+                        width: '140px',
+                        borderRadius: '3px',
+                        letterSpacing: '1.5px',
+                      }}
+                      className='waves-effect waves-light hoverable btn-small black'
+                    >
+                      Delete PR
+                    </button>
+                  </div>
+                )}
             </div>
           </div>
         </div>
@@ -69,37 +83,41 @@ const PRItem = ({
           Filed on{' '}
           <b>
             <Moment format='DD/MM/YYYY'>{created}</Moment>
-          </b>
+          </b>{' '}
+          by <b>{userName}</b>
         </p>
         <div className='card-action'>
           <div className='row'>
             <div className='s12 center-align'>
               <div className='col s6'>
-                <Link
-                  to='#!'
+                <button
+                  onClick={`/post/${_id}`}
                   style={{
                     width: '140px',
                     borderRadius: '3px',
                     letterSpacing: '1.5px',
                   }}
-                  class='waves-effect waves-light hoverable btn-small green'
+                  className='waves-effect waves-light hoverable btn-small green'
                 >
                   View PR
-                </Link>
+                </button>
               </div>
-              <div className='col s6'>
-                <Link
-                  to='#!'
-                  style={{
-                    width: '140px',
-                    borderRadius: '3px',
-                    letterSpacing: '1.5px',
-                  }}
-                  class='waves-effect waves-light hoverable btn-small black'
-                >
-                  Delete PR
-                </Link>
-              </div>
+              {!auth.loading &&
+                postedBy.toString() === auth.user.id.toString() && (
+                  <div className='col s6'>
+                    <button
+                      onClick={(e) => deletePR(_id)}
+                      style={{
+                        width: '140px',
+                        borderRadius: '3px',
+                        letterSpacing: '1.5px',
+                      }}
+                      className='waves-effect waves-light hoverable btn-small black'
+                    >
+                      Delete PR
+                    </button>
+                  </div>
+                )}
             </div>
           </div>
         </div>
@@ -107,21 +125,24 @@ const PRItem = ({
     </div>
   );
   return (
-    <div className='row'>
-      <div className='col s12 m16'>
-        {status === 'pending' ? pendingPR : passedPR}
+    <div className='container'>
+      <div className='row'>
+        <div className='col s12 m16'>
+          {status === 'pending' ? pendingPR : passedPR}
+        </div>
       </div>
     </div>
   );
 };
 
 PRItem.propTypes = {
-  post: PropTypes.object.isRequired,
+  pr: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
+  deletePR: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, {})(PRItem);
+export default connect(mapStateToProps, { deletePR })(PRItem);

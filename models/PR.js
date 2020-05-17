@@ -26,7 +26,7 @@ const PRSchema = new Schema({
       },
       materialCode: {
         type: Number,
-        required: true,
+        default: 1111,
         description: '4 digit code of material.',
       },
     },
@@ -42,6 +42,9 @@ const PRSchema = new Schema({
     type: String,
     enum: ['pending', 'passed'],
     default: 'pending',
+  },
+  userName: {
+    type: String,
   },
 });
 

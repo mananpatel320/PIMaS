@@ -16,12 +16,12 @@ const Prs = ({ getPRS, pr: { prs, loading } }) => {
       <div className='container valign-wrapper'>
         <div className='row'>
           <div className='col s12 center-align'>
-            <h4>
+            <h5>
               <b>PURCHASE REQUISITIONS</b>
               <p className='flow-text grey-text text-darken-1'>
                 Latest <b>PRs</b> filed will show here
               </p>
-            </h4>
+            </h5>
           </div>
         </div>
       </div>

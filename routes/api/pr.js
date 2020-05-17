@@ -14,7 +14,7 @@ router.get(
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     PR.find()
-      .sort({ date: -1 })
+      .sort({ created: -1 })
       .then((pr) => res.json(pr));
   }
 );
@@ -48,13 +48,15 @@ router.get(
 router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
-  (req, res) => {
+  async (req, res) => {
+    const user = await User.findById(req.user.id).select('-password');
     const newPR = new PR({
       name: req.body.name,
       materials: req.body.materials,
       postedBy: req.user.id,
       deliveryTime: req.body.deliveryTime,
       status: req.body.status,
+      userName: user.name,
     });
 
     newPR.save((err, pr) => {
