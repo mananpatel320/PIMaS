@@ -60,7 +60,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
   );
 
   const guestLinksnav = (
-    <ul className='sidenav' id='mobile-demo'>
+    <ul className='sidenav sidenav-close' id='mobile-demo'>
       <li>
         <Link to='/login'>Login</Link>
       </li>
@@ -84,13 +84,13 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
               <i className='material-icons'>arrow_drop_down</i>
               Purchase Requisition
             </Link>
-            <div className='collapsible-body'>
+            <div className='collapsible-body sidenav-close'>
               <ul>
                 <li>
                   <Link to='#!'>New PR</Link>
                 </li>
                 <li>
-                  <Link to='#!'>All PRs</Link>
+                  <Link to='/pr'>All PRs</Link>
                 </li>
                 <li>
                   <Link to='#!'>My PRs</Link>
@@ -107,7 +107,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
               <i className='material-icons'>arrow_drop_down</i>
               Purchase Order
             </Link>
-            <div className='collapsible-body'>
+            <div className='collapsible-body sidenav-close'>
               <ul>
                 <li>
                   <Link to='#!'>New PO</Link>
@@ -143,7 +143,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
           </Link>
         </li>
         <li>
-          <Link to='#!' className='green-text'>
+          <Link to='/pr' className='green-text'>
             All PRs
           </Link>
         </li>
