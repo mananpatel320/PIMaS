@@ -11,7 +11,7 @@ class Landing extends Component {
               <b>Welcome!</b>
             </h4>
             <p className='flow-text grey-text text-darken-1'>
-              All your inventory at one place.
+              Let's get started
             </p>
             <br />
             <div className='col s6'>

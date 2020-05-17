@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/js/sidenav.js';
@@ -9,20 +9,30 @@ import { logoutUser } from '../../actions/authActions';
 // https://itnext.io/add-state-and-lifecycle-methods-to-function-components-with-react-hooks-8e2bdc44d43d
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
+  useEffect(() => {
+    window.$(document).ready(function () {
+      window.$('.sidenav').sidenav();
+      window.$('.button-collapse').sidenav();
+      window.$('.dropdown-trigger').dropdown();
+      window.$('.collapsible').collapsible();
+    });
+  });
   const authLinks = (
-    <ul class='right hide-on-med-and-down'>
+    <ul className='right hide-on-med-and-down'>
       <li>
-        <Link to='#!' class='black-text'>
-          PR
+        <Link className='dropdown-trigger black-text' data-target='dropdown1'>
+          Purchase Requisition
+          <i className='material-icons right'>arrow_drop_down</i>
         </Link>
       </li>
       <li>
-        <Link to='#!' class='black-text'>
-          PO
+        <Link className='dropdown-trigger black-text' data-target='dropdown2'>
+          Purchase Order
+          <i className='material-icons right'>arrow_drop_down</i>
         </Link>
       </li>
       <li>
-        <Link onClick={logoutUser} to='#!' class='black-text'>
+        <Link onClick={logoutUser} to='#!' className='black-text'>
           <b>Logout</b>
         </Link>
       </li>
@@ -30,19 +40,19 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
   );
 
   const guestLinks = (
-    <ul class='right hide-on-med-and-down'>
+    <ul className='right hide-on-med-and-down'>
       <li>
-        <Link to='#' class='black-text'>
+        <Link to='#' className='black-text'>
           <b>Developers</b>
         </Link>
       </li>
       <li>
-        <Link to='/register' class='black-text'>
+        <Link to='/register' className='black-text'>
           Register
         </Link>
       </li>
       <li>
-        <Link to='/login' class='black-text'>
+        <Link to='/login' className='black-text'>
           Login
         </Link>
       </li>
@@ -50,7 +60,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
   );
 
   const guestLinksnav = (
-    <ul class='sidenav' id='mobile-demo'>
+    <ul className='sidenav' id='mobile-demo'>
       <li>
         <Link to='/login'>Login</Link>
       </li>
@@ -66,30 +76,107 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
   );
 
   const authLinksnav = (
-    <ul class='sidenav' id='mobile-demo'>
-      <li>
-        <Link to='#!'>PR</Link>
+    <ul className='sidenav' id='mobile-demo'>
+      <li className='no-padding'>
+        <ul className='collapsible collapsible-accordion'>
+          <li>
+            <Link className='collapsible-header'>
+              <i className='material-icons'>arrow_drop_down</i>
+              Purchase Requisition
+            </Link>
+            <div className='collapsible-body'>
+              <ul>
+                <li>
+                  <Link to='#!'>New PR</Link>
+                </li>
+                <li>
+                  <Link to='#!'>All PRs</Link>
+                </li>
+                <li>
+                  <Link to='#!'>My PRs</Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
       </li>
-      <li>
-        <Link to='#!'>PO</Link>
+      <li className='no-padding'>
+        <ul className='collapsible collapsible-accordion'>
+          <li>
+            <Link className='collapsible-header'>
+              <i className='material-icons'>arrow_drop_down</i>
+              Purchase Order
+            </Link>
+            <div className='collapsible-body'>
+              <ul>
+                <li>
+                  <Link to='#!'>New PO</Link>
+                </li>
+                <li>
+                  <Link to='#!'>All POs</Link>
+                </li>
+                <li>
+                  <Link to='#!'>My POs</Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
       </li>
-      <li>
-        <Link onClick={logoutUser} to='#!'>
-          <b>Logout</b>
-        </Link>
+      <li className='no-padding'>
+        <li>
+          <Link onClick={logoutUser} to='#!' className='waves-effect'>
+            <i className='material-icons'>input</i>
+            <b>Logout</b>
+          </Link>
+        </li>
       </li>
     </ul>
   );
 
   return (
     <Fragment>
+      <ul id='dropdown1' className='dropdown-content'>
+        <li>
+          <Link to='#!' className='green-text'>
+            New PR
+          </Link>
+        </li>
+        <li>
+          <Link to='#!' className='green-text'>
+            All PRs
+          </Link>
+        </li>
+        <li>
+          <Link to='#!' className='green-text'>
+            My PRs
+          </Link>
+        </li>
+      </ul>
+      <ul id='dropdown2' className='dropdown-content'>
+        <li>
+          <Link to='#!' className='green-text'>
+            New PO
+          </Link>
+        </li>
+        <li>
+          <Link to='#!' className='green-text'>
+            All POs
+          </Link>
+        </li>
+        <li>
+          <Link to='#!' className='green-text'>
+            My POs
+          </Link>
+        </li>
+      </ul>
       <nav className='z-depth-0'>
         <div className='nav-wrapper green'>
           <Link to='/' className='brand-logo black-text'>
             THE <b>PALM</b>
           </Link>
-          <a href='#!' data-target='mobile-demo' class='sidenav-trigger'>
-            <i class='material-icons black-text'>menu</i>
+          <a href='#!' data-target='mobile-demo' className='sidenav-trigger'>
+            <i className='material-icons black-text'>menu</i>
           </a>
           {!loading && (
             <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>

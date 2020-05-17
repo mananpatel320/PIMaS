@@ -18,7 +18,7 @@ class Dashboard extends Component {
             <h4>
               Hey there, <b>{user.name.split(' ')[0]}</b>
               <p className='flow-text grey-text text-darken-1'>
-                Let's get started{' '}
+                All your inventory at one place{' '}
               </p>
             </h4>
             <button
