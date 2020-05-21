@@ -1,4 +1,11 @@
-import { GET_PRS, PR_ERROR, DELETE_PR, ADD_PR } from '../actions/types';
+import {
+  GET_PRS,
+  PR_ERROR,
+  DELETE_PR,
+  ADD_PR,
+  GET_MYPRS,
+  GET_PR,
+} from '../actions/types';
 
 const initialState = {
   prs: [],
@@ -12,6 +19,18 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case GET_PRS:
+      return {
+        ...state,
+        prs: payload,
+        loading: false,
+      };
+    case GET_PR:
+      return {
+        ...state,
+        pr: payload,
+        loading: false,
+      };
+    case GET_MYPRS:
       return {
         ...state,
         prs: payload,

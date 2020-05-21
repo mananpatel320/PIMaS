@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
@@ -37,8 +38,8 @@ const PRItem = ({
           <div className='row'>
             <div className='s12 center-align'>
               <div className='col s6'>
-                <button
-                  onClick={`pr/${_id}`}
+                <Link
+                  to={`/pr/viewpr/${_id}`}
                   style={{
                     width: '140px',
                     borderRadius: '3px',
@@ -47,7 +48,7 @@ const PRItem = ({
                   className='waves-effect waves-light hoverable btn-small red'
                 >
                   View PR
-                </button>
+                </Link>
               </div>
               {!auth.loading &&
                 postedBy.toString() === auth.user.id.toString() && (
@@ -90,8 +91,8 @@ const PRItem = ({
           <div className='row'>
             <div className='s12 center-align'>
               <div className='col s6'>
-                <button
-                  onClick={`/post/${_id}`}
+                <Link
+                  to={`/pr/viewpr/${_id}`}
                   style={{
                     width: '140px',
                     borderRadius: '3px',
@@ -100,7 +101,7 @@ const PRItem = ({
                   className='waves-effect waves-light hoverable btn-small green'
                 >
                   View PR
-                </button>
+                </Link>
               </div>
               {!auth.loading &&
                 postedBy.toString() === auth.user.id.toString() && (

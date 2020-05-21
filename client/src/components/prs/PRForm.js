@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addPR } from '../../actions/prActions';
+import {} from '../../actions/prActions';
 
-const PRForm = ({ addPost }) => {
-  const [text, setText] = useState('');
-  return <div></div>;
+const PRForm = ({}) => {
+  return (
+    <div>
+      <h1>Hello</h1>
+    </div>
+  );
 };
 
-PRForm.propTypes = {
-  addPR: PropTypes.func.isRequired,
-};
+PRForm.propTypes = {};
 
-export default connect(null, { addPR })(PRForm);
+export default connect(null, {})(PRForm);

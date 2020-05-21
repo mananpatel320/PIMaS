@@ -6,11 +6,11 @@ const passport = require('passport');
 const PR = require('../../models/PR');
 const User = require('../../models/User');
 
-// @route  GET api/pr
+// @route  GET api/pr/allprs
 // @desc   Show All prs
 // @access Private
 router.get(
-  '/',
+  '/allprs',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     PR.find()
@@ -19,11 +19,25 @@ router.get(
   }
 );
 
-// @route   GET api/pr/:id
+// @route  GET api/pr/myprs
+// @desc   Show All prs created by logged in user
+// @access Private
+router.get(
+  '/myprs',
+  passport.authenticate('jwt', { session: false }),
+  async (req, res) => {
+    const user = await User.findById(req.user.id).select('-password');
+    PR.find({ postedBy: user._id })
+      .sort({ created: -1 })
+      .then((pr) => res.json(pr));
+  }
+);
+
+// @route   GET api/pr/viewpr/:id
 // @desc    Show PRs by ID
 // @access  Private
 router.get(
-  '/:id',
+  '/viewpr/:id',
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
     try {
@@ -42,7 +56,7 @@ router.get(
   }
 );
 
-// @route   POST api/pr
+// @route   POST api/pr/
 // @desc    Create prs
 // @access  Private
 router.post(
@@ -72,7 +86,7 @@ router.post(
 
 // @route   DELETE api/pr
 // @desc    Delete a pr
-// @access  Public
+// @access  Private
 router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),

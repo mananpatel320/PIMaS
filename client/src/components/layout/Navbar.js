@@ -15,6 +15,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
       window.$('.button-collapse').sidenav();
       window.$('.dropdown-trigger').dropdown();
       window.$('.collapsible').collapsible();
+      window.$('.scrollspy').scrollSpy();
     });
   });
   const authLinks = (
@@ -95,13 +96,13 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
             <div className='collapsible-body sidenav-close'>
               <ul>
                 <li>
-                  <Link to='#!'>New PR</Link>
+                  <Link to='/pr/add'>New PR</Link>
                 </li>
                 <li>
-                  <Link to='/pr'>All PRs</Link>
+                  <Link to='/pr/allprs'>All PRs</Link>
                 </li>
                 <li>
-                  <Link to='#!'>My PRs</Link>
+                  <Link to='/pr/myprs'>My PRs</Link>
                 </li>
               </ul>
             </div>
@@ -146,17 +147,17 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
     <Fragment>
       <ul id='dropdown1' className='dropdown-content'>
         <li>
-          <Link to='#!' className='green-text'>
+          <Link to='/pr/add' className='green-text'>
             New PR
           </Link>
         </li>
         <li>
-          <Link to='/pr' className='green-text'>
+          <Link to='/pr/allprs' className='green-text'>
             All PRs
           </Link>
         </li>
         <li>
-          <Link to='#!' className='green-text'>
+          <Link to='/pr/myprs' className='green-text'>
             My PRs
           </Link>
         </li>

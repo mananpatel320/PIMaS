@@ -5,3 +5,5 @@ export const GET_PRS = 'GET_PRS';
 export const PR_ERROR = 'PR_ERROR';
 export const DELETE_PR = 'DELETE_PR';
 export const ADD_PR = 'ADD_PR';
+export const GET_MYPRS = 'GET_MYPRS';
+export const GET_PR = 'GET_PR';

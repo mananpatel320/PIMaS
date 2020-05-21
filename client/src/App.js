@@ -10,6 +10,10 @@ import Login from './components/auth/Login';
 import PrivateRoute from './components/private-route/PrivateRoute';
 import Dashboard from './components/dashboard/Dashboard';
 import Prs from './components/prs/Prs';
+import MyPrs from './components/prs/MyPrs';
+import Pr from './components/pr/PR';
+import PRForm from './components/prs/PRForm';
+
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -42,7 +46,10 @@ class App extends Component {
             <Route exact path='/login' component={Login} />
             <Switch>
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
-              <PrivateRoute exact path='/pr' component={Prs} />
+              <PrivateRoute exact path='/pr/allprs' component={Prs} />
+              <PrivateRoute exact path='/pr/myprs' component={MyPrs} />
+              <PrivateRoute exact path='/pr/viewpr/:id' component={Pr} />
+              <PrivateRoute exact path='/pr/add' component={PRForm} />
             </Switch>
           </div>
         </Router>
