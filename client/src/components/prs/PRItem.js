@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { deletePR } from '../../actions/prActions';
+import M from 'materialize-css';
 
 const PRItem = ({
   deletePR,
@@ -54,7 +55,10 @@ const PRItem = ({
                 postedBy.toString() === auth.user.id.toString() && (
                   <div className='col s6'>
                     <button
-                      onClick={(e) => deletePR(_id)}
+                      onClick={(e) =>
+                        deletePR(_id) &&
+                        M.toast({ html: 'PR deleted successfully' })
+                      }
                       style={{
                         width: '140px',
                         borderRadius: '3px',
@@ -107,7 +111,10 @@ const PRItem = ({
                 postedBy.toString() === auth.user.id.toString() && (
                   <div className='col s6'>
                     <button
-                      onClick={(e) => deletePR(_id)}
+                      onClick={(e) =>
+                        deletePR(_id) &&
+                        M.toast({ html: 'PR deleted successfully' })
+                      }
                       style={{
                         width: '140px',
                         borderRadius: '3px',

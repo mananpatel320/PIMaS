@@ -8,10 +8,10 @@ class Landing extends Component {
         <div className='row'>
           <div className='col s12 center-align'>
             <h4>
-              <b>Welcome!</b>
+              <b>Welcome to The PIMaS!</b>
             </h4>
             <p className='flow-text grey-text text-darken-1'>
-              Let's get started
+              All your inventory at one place
             </p>
             <br />
             <div className='col s6'>

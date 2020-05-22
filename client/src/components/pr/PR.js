@@ -4,12 +4,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../spinner/Spinner';
 import { getPR, deletePR } from '../../actions/prActions';
+import M from 'materialize-css';
 
 import Moment from 'react-moment';
 
 const PR = ({ auth, deletePR, getPR, pr: { pr, loading }, match }) => {
   useEffect(() => {
     getPR(match.params.id);
+    window.$(document).ready(function () {
+      window.$('.fixed-action-btn').floatingActionButton();
+    });
   }, [getPR]);
 
   return loading || pr === null ? (
@@ -58,37 +62,31 @@ const PR = ({ auth, deletePR, getPR, pr: { pr, loading }, match }) => {
         </table>
         <div className='row'>
           <div className='s12 center-align'>
-            <div className='col s6'>
-              <Link
-                to='#'
-                style={{
-                  width: '140px',
-                  borderRadius: '3px',
-                  letterSpacing: '1.5px',
-                }}
-                className='waves-effect waves-light hoverable btn-small black'
-              >
-                Edit PR
-              </Link>
-            </div>
             {!auth.loading &&
               pr.postedBy.toString() === auth.user.id.toString() && (
-                <div className='col s6'>
-                  <button
-                    onClick={(e) => deletePR(pr._id) && window.history.back()}
-                    style={{
-                      width: '140px',
-                      borderRadius: '3px',
-                      letterSpacing: '1.5px',
-                    }}
-                    className='waves-effect waves-light hoverable btn-small black'
-                  >
-                    Delete PR
-                  </button>
-                </div>
+                <button
+                  onClick={(e) =>
+                    deletePR(pr._id) &&
+                    M.toast({ html: 'PR deleted successfully' }) &&
+                    window.history.back()
+                  }
+                  style={{
+                    width: '140px',
+                    borderRadius: '3px',
+                    letterSpacing: '1.5px',
+                  }}
+                  className='waves-effect waves-light hoverable btn-small black'
+                >
+                  Delete PR
+                </button>
               )}
           </div>
         </div>
+      </div>
+      <div className='fixed-action-btn'>
+        <Link to='#!' className='btn-floating btn-large green'>
+          <i className='large material-icons black-text'>mode_edit</i>
+        </Link>
       </div>
     </Fragment>
   );

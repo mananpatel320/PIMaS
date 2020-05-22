@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getMyPRS } from '../../actions/prActions';
 import Spinner from '../spinner/Spinner';
@@ -9,6 +10,11 @@ const MyPrs = ({ getMyPRS, pr: { prs, loading } }) => {
   useEffect(() => {
     getMyPRS();
   }, [getMyPRS]);
+  useEffect(() => {
+    window.$(document).ready(function () {
+      window.$('.fixed-action-btn').floatingActionButton();
+    });
+  });
   return loading ? (
     <Spinner />
   ) : (
@@ -30,6 +36,11 @@ const MyPrs = ({ getMyPRS, pr: { prs, loading } }) => {
         {prs.map((pr) => (
           <PRItem key={pr._id} pr={pr} />
         ))}
+      </div>
+      <div className='fixed-action-btn'>
+        <Link to='/pr/add' className='btn-floating btn-large green'>
+          <i className='large material-icons black-text'>add</i>
+        </Link>
       </div>
     </Fragment>
   );
