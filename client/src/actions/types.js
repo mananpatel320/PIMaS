@@ -7,3 +7,5 @@ export const DELETE_PR = 'DELETE_PR';
 export const ADD_PR = 'ADD_PR';
 export const GET_MYPRS = 'GET_MYPRS';
 export const GET_PR = 'GET_PR';
+export const ADD_MATERIAL = 'ADD_MATERIAL';
+export const REMOVE_MATERIAL = 'REMOVE_MATERIAL';

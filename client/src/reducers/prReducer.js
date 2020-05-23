@@ -5,6 +5,8 @@ import {
   ADD_PR,
   GET_MYPRS,
   GET_PR,
+  ADD_MATERIAL,
+  REMOVE_MATERIAL,
 } from '../actions/types';
 
 const initialState = {
@@ -52,6 +54,23 @@ export default function (state = initialState, action) {
       return {
         ...state,
         error: payload,
+        loading: false,
+      };
+    case ADD_MATERIAL:
+      return {
+        ...state,
+        pr: { ...state.pr, materials: payload },
+        loading: false,
+      };
+    case REMOVE_MATERIAL:
+      return {
+        ...state,
+        post: {
+          ...state.pr,
+          materials: state.pr.materials.filter(
+            (material) => material._id !== payload
+          ),
+        },
         loading: false,
       };
     default:

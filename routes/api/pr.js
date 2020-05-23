@@ -56,11 +56,11 @@ router.get(
   }
 );
 
-// @route   POST api/pr/
+// @route   POST api/pr/add
 // @desc    Create prs
 // @access  Private
 router.post(
-  '/',
+  '/add',
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
     const user = await User.findById(req.user.id).select('-password');
@@ -111,6 +111,75 @@ router.delete(
       if (err.kind == 'ObjectId') {
         return res.status(404).json({ msg: 'PR not found' });
       }
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+// @route     POST api/pr/material/:id
+// @desc      Add material to PR
+// @access    Private
+router.post(
+  '/material/:id',
+  passport.authenticate('jwt', { session: false }),
+  async (req, res) => {
+    try {
+      const pr = await PR.findById(req.params.id);
+
+      const newMaterial = {
+        materialName: req.body.materialName,
+        quantity: req.body.quantity,
+      };
+
+      pr.materials.unshift(newMaterial);
+
+      await pr.save();
+
+      res.json(pr.materials);
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+// @route     DELETE api/pr/material/:id/:material_id
+// @desc      Delete material of PR
+// @access    Private
+
+router.delete(
+  '/material/:id/:material_id',
+  passport.authenticate('jwt', { session: false }),
+  async (req, res) => {
+    try {
+      const pr = await PR.findById(req.params.id);
+
+      //pull out material
+      const material = pr.materials.find(
+        (material) => material.id === req.params.material_id
+      );
+
+      //Make sure material exists
+      if (!material) {
+        return res.status(404).json({ msg: 'Material does not exist' });
+      }
+
+      // Check user
+      if (pr.postedBy.toString() !== req.user.id) {
+        return res.status(401).json({ msg: 'User not authorized' });
+      }
+
+      const removeMaterial = pr.materials
+        .map((material) => material._id.toString())
+        .indexOf(req.params.material_id);
+
+      pr.materials.splice(removeMaterial, 1);
+
+      await pr.save();
+
+      res.json(pr.materials);
+    } catch (err) {
+      console.log(err.message);
       res.status(500).send('Server Error');
     }
   }

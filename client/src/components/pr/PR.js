@@ -41,25 +41,27 @@ const PR = ({ auth, deletePR, getPR, pr: { pr, loading }, match }) => {
           </li>
           <li>STATUS : {pr.status}</li>
         </div>
-        <table className='highlight centered'>
-          <thead>
-            <tr>
-              <th className='grey-text text-darken-1'>MATERIAL CODE</th>
-              <th className='grey-text text-darken-1'>MATERIAL NAME</th>
-              <th className='grey-text text-darken-1'>QUANTITY</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {pr.materials.map((mat) => (
+        <div className='row'>
+          <table className='highlight centered'>
+            <thead>
               <tr>
-                <td>{mat.materialCode}</td>
-                <td>{mat.materialName}</td>
-                <td>{mat.quantity}</td>
+                <th className='grey-text text-darken-1'>MATERIAL CODE</th>
+                <th className='grey-text text-darken-1'>MATERIAL NAME</th>
+                <th className='grey-text text-darken-1'>QUANTITY</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {pr.materials.map((mat) => (
+                <tr>
+                  <td>{mat.materialCode}</td>
+                  <td>{mat.materialName}</td>
+                  <td>{mat.quantity}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
         <div className='row'>
           <div className='s12 center-align'>
             {!auth.loading &&
@@ -83,11 +85,13 @@ const PR = ({ auth, deletePR, getPR, pr: { pr, loading }, match }) => {
           </div>
         </div>
       </div>
-      <div className='fixed-action-btn'>
-        <Link to='#!' className='btn-floating btn-large green'>
-          <i className='large material-icons black-text'>mode_edit</i>
-        </Link>
-      </div>
+      {!auth.loading && pr.postedBy.toString() === auth.user.id.toString() && (
+        <div className='fixed-action-btn'>
+          <Link to='#!' className='btn-floating btn-large green'>
+            <i className='large material-icons black-text'>mode_edit</i>
+          </Link>
+        </div>
+      )}
     </Fragment>
   );
 };

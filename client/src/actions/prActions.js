@@ -6,6 +6,8 @@ import {
   ADD_PR,
   GET_MYPRS,
   GET_PR,
+  REMOVE_MATERIAL,
+  ADD_MATERIAL,
 } from './types';
 
 // Get prs
@@ -78,17 +80,44 @@ export const getPR = (id) => async (dispatch) => {
 
 //Add pr
 export const addPR = (formData) => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
   try {
-    const res = await axios.post('/api/pr/add', formData, config);
-
+    const res = await axios.post('/api/pr/add', formData);
     dispatch({
       type: ADD_PR,
       payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PR_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//Add material
+export const addMaterial = (prId, formData) => async (dispatch) => {
+  try {
+    const res = await axios.post(`/api/pr/material/${prId}`, formData);
+    dispatch({
+      type: ADD_MATERIAL,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PR_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//Delete material
+export const deleteMaterial = (prId, materialId) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/pr/material/${prId}/${materialId}`);
+
+    dispatch({
+      type: REMOVE_MATERIAL,
+      payload: materialId,
     });
   } catch (err) {
     dispatch({
